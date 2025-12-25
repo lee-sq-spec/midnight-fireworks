@@ -1,91 +1,130 @@
-/* 全局 */
-body, html {
+/* 全局设置 */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  background: #020202;
+  background-color: #020202;
   color: white;
+  overflow: hidden;
 }
 
 /* 背景画布 */
 #sceneCanvas, #fireworkCanvas {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
 
-/* 容器 */
+/* 主容器 */
 #container {
   position: relative;
   z-index: 10;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 24px;
   padding: 24px;
+  width: 100%;
+  height: 100%;
 }
 
 /* 头部 */
 header {
   text-align: center;
 }
+
 #countdown .label {
   font-size: 12px;
   letter-spacing: 0.4em;
   color: #FFD966;
   opacity: 0.6;
 }
+
 #countdown .time {
   font-size: 48px;
   font-weight: bold;
   color: #FFD966;
-  text-shadow: 0 0 20px rgba(255,217,102,0.5);
+  text-shadow: 0 0 20px rgba(255, 217, 102, 0.5);
 }
 
-/* 按钮 */
+/* 主内容 */
+main#mainContent {
+  text-align: center;
+}
+
 button {
   cursor: pointer;
   padding: 12px 24px;
   font-weight: bold;
   border-radius: 12px;
   border: none;
-  background: #FF6600;
+  background-color: #FF6600;
   color: white;
   font-size: 16px;
-  transition: 0.3s;
+  transition: transform 0.3s;
 }
-button:hover { transform: scale(1.05); }
-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* 模态框 */
 .modal {
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  background: #0a0a0a;
+  background-color: #0a0a0a;
   border-radius: 32px;
   padding: 24px;
   width: 90%;
   max-width: 480px;
   z-index: 20;
-  box-shadow: 0 0 50px rgba(255,102,0,0.2);
+  box-shadow: 0 0 50px rgba(255, 102, 0, 0.2);
 }
-.hidden { display: none; }
-.modal input, .modal textarea {
+
+.hidden {
+  display: none;
+}
+
+.modal input,
+.modal textarea {
   width: 100%;
   margin: 8px 0;
   padding: 8px;
   border-radius: 12px;
-  border: 1px solid #FFF2;
-  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #111;
   color: #fff;
   outline: none;
+  font-size: 14px;
 }
-textarea { resize: none; height: 100px; }
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+/* 管理员按钮特殊样式 */
+#fireworkBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 30;
+}
+
