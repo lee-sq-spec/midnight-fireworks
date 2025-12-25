@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShyuanQinn 2026 Countdown</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 背景画布 -->
+<canvas id="sceneCanvas"></canvas>
+<canvas id="fireworkCanvas"></canvas>
+
+<!-- 主容器 -->
+<div id="container">
+
+  <!-- 头部: 倒计时 -->
+  <header>
+    <div id="countdown">
+      <div class="label">2026 Countdown</div>
+      <div class="time" id="timeLeft">00:00:00</div>
+    </div>
+    <div id="notification"></div>
+  </header>
+
+  <!-- 主页内容 -->
+  <main id="mainContent">
+    <h1>WELCOME 2026</h1>
+    <p>在马六甲的星空下，写下你对我的年度祝福</p>
+    <button id="openWish">填写祝福</button>
+    <button id="enterMain" disabled>跨年前 1 小时解锁主会场</button>
+  </main>
+
+  <!-- 管理员入口 -->
+  <div id="adminPanel">
+    <button id="openAdmin">Admin</button>
+    <div id="adminModal" class="modal hidden">
+      <h2>管理员验证</h2>
+      <form id="adminForm">
+        <input type="text" placeholder="Keyword" id="adminK" required>
+        <input type="text" placeholder="Secret Code" id="adminS" required>
+        <input type="password" placeholder="Password" id="adminP" required>
+        <button type="submit">Authorize</button>
+        <p id="adminErr"></p>
+      </form>
+      <button id="closeAdmin">关闭</button>
+    </div>
+  </div>
+
+  <!-- 祝福表单 -->
+  <div id="wishModal" class="modal hidden">
+    <h2>发送祝福</h2>
+    <form id="wishForm">
+      <input type="text" placeholder="昵称 / 匿名" id="wishNick" required>
+      <input type="text" placeholder="年度感谢 / 帮助事项 (可选)" id="wishThanks">
+      <textarea placeholder="写下你的 2026 愿望..." id="wishContent" required></textarea>
+      <button type="submit">发送祝福</button>
+    </form>
+    <button id="closeWish">关闭</button>
+  </div>
+
+  <!-- 烟花触发按钮 (管理员专用) -->
+  <button id="fireworkBtn" class="hidden">触发烟花</button>
+
+</div>
+
+<script src="logic.js"></script>
+</body>
+</html>
