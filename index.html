@@ -1,70 +1,60 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-Hans">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShyuanQinn 2026 Countdown</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨年互动网页</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Layer 0: 背景动画容器 -->
+  <canvas id="bgCanvas"></canvas>
 
-<!-- 背景画布 -->
-<canvas id="sceneCanvas"></canvas>
-<canvas id="fireworkCanvas"></canvas>
+  <!-- Layer 1: 页面容器 -->
+  <div id="appContainer">
+    <!-- Header Zone -->
+    <header id="headerZone">
+      <div id="countdown" class="countdown">00:00:00</div>
+    </header>
 
-<!-- 主容器 -->
-<div id="container">
+    <!-- Main Content Zone -->
+    <main id="mainZone">
+      <!-- 左功能区：祝福墙 -->
+      <section id="blessWall">
+        <h2>祝福墙</h2>
+        <ul id="blessList"></ul>
+      </section>
 
-  <!-- 头部: 倒计时 -->
-  <header>
-    <div id="countdown">
-      <div class="label">2026 Countdown</div>
-      <div class="time" id="timeLeft">00:00:00</div>
-    </div>
-    <div id="notification"></div>
-  </header>
+      <!-- 右功能区：在线人数 & 俄罗斯方块按钮 -->
+      <section id="statusZone">
+        <div id="onlineStatus">当前在线人数：0</div>
+        <button id="tetrisBtn">俄罗斯方块</button>
+      </section>
+    </main>
 
-  <!-- 主页内容 -->
-  <main id="mainContent">
-    <h1>WELCOME 2026</h1>
-    <p>在马六甲的星空下，写下你对我的年度祝福</p>
-    <button id="openWish">填写祝福</button>
-    <button id="enterMain" disabled>跨年前 1 小时解锁主会场</button>
-  </main>
-
-  <!-- 管理员入口 -->
-  <div id="adminPanel">
-    <button id="openAdmin">Admin</button>
-    <div id="adminModal" class="modal hidden">
-      <h2>管理员验证</h2>
-      <form id="adminForm">
-        <input type="text" placeholder="Keyword" id="adminK" required>
-        <input type="text" placeholder="Secret Code" id="adminS" required>
-        <input type="password" placeholder="Password" id="adminP" required>
-        <button type="submit">Authorize</button>
-        <p id="adminErr"></p>
-      </form>
-      <button id="closeAdmin">关闭</button>
-    </div>
+    <!-- Footer Zone -->
+    <footer id="footerZone">
+      <button id="adminBtn" title="管理员入口"></button>
+    </footer>
   </div>
 
-  <!-- 祝福表单 -->
-  <div id="wishModal" class="modal hidden">
-    <h2>发送祝福</h2>
-    <form id="wishForm">
-      <input type="text" placeholder="昵称 / 匿名" id="wishNick" required>
-      <input type="text" placeholder="年度感谢 / 帮助事项 (可选)" id="wishThanks">
-      <textarea placeholder="写下你的 2026 愿望..." id="wishContent" required></textarea>
-      <button type="submit">发送祝福</button>
-    </form>
-    <button id="closeWish">关闭</button>
+  <!-- Layer 3: 弹窗 -->
+  <div id="blessForm" class="popup hidden">
+    <h3>填写你的祝福</h3>
+    <input type="text" id="nickname" placeholder="昵称 / 匿名">
+    <textarea id="thankContent" placeholder="年度感谢 / 帮助事项"></textarea>
+    <textarea id="newYearWish" placeholder="新年祝福"></textarea>
+    <button id="submitBless">提交祝福</button>
   </div>
 
-  <!-- 烟花触发按钮 (管理员专用) -->
-  <button id="fireworkBtn" class="hidden">触发烟花</button>
+  <div id="adminPopup" class="popup hidden">
+    <h3>管理员验证</h3>
+    <input type="text" id="adminKeyword" placeholder="由站点所有者私下配置">
+    <input type="text" id="adminSecret" placeholder="由站点所有者私下配置">
+    <input type="password" id="adminPassword" placeholder="由站点所有者私下配置">
+    <button id="adminSubmit">提交</button>
+  </div>
 
-</div>
-
-<script src="logic.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
