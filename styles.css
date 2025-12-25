@@ -1,21 +1,16 @@
-/* 全局设置 */
-* {
-  box-sizing: border-box;
+/* ------------------ 通用 ------------------ */
+body, html {
   margin: 0;
   padding: 0;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
   font-family: 'Montserrat', sans-serif;
-  background-color: #020202;
-  color: white;
+  height: 100%;
   overflow: hidden;
 }
 
-/* 背景画布 */
-#sceneCanvas, #fireworkCanvas {
+.hidden { display: none; }
+
+/* ------------------ Layer 0 背景 ------------------ */
+#bgCanvas {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,107 +19,68 @@ html, body {
   z-index: 0;
 }
 
-/* 主容器 */
-#container {
-  position: relative;
-  z-index: 10;
+/* ------------------ Layer 1 页面容器 ------------------ */
+#appContainer {
+  display: grid;
+  grid-template-rows: 120px auto 120px;
+  grid-template-columns: 40% 40%;
+  grid-template-areas:
+    "headerZone headerZone"
+    "blessWall statusZone"
+    "footerZone footerZone";
+  gap: 24px;
+  padding: 24px 32px;
+  z-index: 1;
+}
+
+/* Header Zone */
+#headerZone { grid-area: headerZone; display: flex; align-items: center; justify-content: center; }
+.countdown { font-weight: bold; font-size: 42px; background: linear-gradient(to right, #FFDD00, #FF6600); -webkit-background-clip: text; color: transparent; }
+
+/* Main Zone */
+#mainZone { display: contents; }
+#blessWall {
+  grid-area: blessWall;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.5);
+  color: #FFFFCC;
+  padding: 16px;
+  border-radius: 12px;
+}
+#blessWall h2 { margin-top: 0; }
+#blessList { list-style: none; padding: 0; }
+
+/* Status Zone */
+#statusZone {
+  grid-area: statusZone;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 24px;
-  padding: 24px;
-  width: 100%;
-  height: 100%;
 }
+#onlineStatus { font-size: 20px; color: #FFDD00; }
+#tetrisBtn { width: 180px; height: 48px; background: #FF6600; color: white; border-radius: 12px; border: none; cursor: pointer; }
 
-/* 头部 */
-header {
-  text-align: center;
-}
+/* Footer Zone */
+#footerZone { grid-area: footerZone; display: flex; justify-content: flex-start; align-items: center; }
+#adminBtn { width: 48px; height: 48px; border-radius: 25px; background: rgba(51,51,51,0.7); border: none; cursor: pointer; }
 
-#countdown .label {
-  font-size: 12px;
-  letter-spacing: 0.4em;
-  color: #FFD966;
-  opacity: 0.6;
-}
-
-#countdown .time {
-  font-size: 48px;
-  font-weight: bold;
-  color: #FFD966;
-  text-shadow: 0 0 20px rgba(255, 217, 102, 0.5);
-}
-
-/* 主内容 */
-main#mainContent {
-  text-align: center;
-}
-
-button {
-  cursor: pointer;
-  padding: 12px 24px;
-  font-weight: bold;
-  border-radius: 12px;
-  border: none;
-  background-color: #FF6600;
-  color: white;
-  font-size: 16px;
-  transition: transform 0.3s;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* 模态框 */
-.modal {
+/* ------------------ 弹窗 Layer 3 ------------------ */
+.popup {
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 520px;
+  height: 420px;
   transform: translate(-50%, -50%);
-  background-color: #0a0a0a;
-  border-radius: 32px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: 24px;
-  width: 90%;
-  max-width: 480px;
-  z-index: 20;
-  box-shadow: 0 0 50px rgba(255, 102, 0, 0.2);
+  z-index: 3;
 }
-
-.hidden {
-  display: none;
-}
-
-.modal input,
-.modal textarea {
-  width: 100%;
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: #111;
-  color: #fff;
-  outline: none;
-  font-size: 14px;
-}
-
-textarea {
-  resize: none;
-  height: 100px;
-}
-
-/* 管理员按钮特殊样式 */
-#fireworkBtn {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  z-index: 30;
-}
-
+.popup h3 { color: #FFFFCC; text-align: center; }
+.popup input, .popup textarea { width: 90%; padding: 8px; border: 2px solid #FFD700; border-radius: 8px; font-size: 16px; }
+.popup button { width: 150px; height: 50px; border-radius: 10px; background: #FF6600; color: white; border: none; cursor: pointer; align-self: center; }
