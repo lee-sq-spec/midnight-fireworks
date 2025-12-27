@@ -1,0 +1,33 @@
+const express = require('express');
+const WebSocket = require('ws');
+
+const app = express();
+const server = require('http').createServer(app);
+const wss = new WebSocket.Server({ server });
+
+// WebSocket广播函数
+function broadcast(data) {
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(data));
+    }
+  });
+}
+
+// 处理祝福消息
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    const data = JSON.parse(message);
+    
+    if (data.type === 'blessing') {
+      // 存储到数据库
+      saveBlessing(data.content);
+      
+      // 广播给所有用户
+      broadcast({
+        type: 'new_blessing',
+        data: data.content
+      });
+    }
+  });
+});
