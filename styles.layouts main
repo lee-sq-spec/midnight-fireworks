@@ -1,0 +1,16 @@
+.main-container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "left right"
+    "footer footer";
+  grid-template-rows: 120px 1fr 120px;
+  grid-template-columns: 40% 40%;
+  gap: 20px;
+  min-height: 100vh;
+}
+
+.header-zone { grid-area: header; }
+.left-zone { grid-area: left; }
+.right-zone { grid-area: right; }
+.footer-zone { grid-area: footer; }
