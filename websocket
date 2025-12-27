@@ -1,0 +1,34 @@
+// 实时通信配置
+const WS_CONFIG = {
+  BLESSINGS_CHANNEL: 'wss://server/blessings',
+  ONLINE_COUNT_CHANNEL: 'wss://server/online',
+  FIREWORKS_CHANNEL: 'wss://server/fireworks',
+  GAME_STATE_CHANNEL: 'wss://server/games'
+};
+
+class WebSocketManager {
+  constructor() {
+    this.connections = {};
+    this.initAllConnections();
+  }
+  
+  initAllConnections() {
+    Object.keys(WS_CONFIG).forEach(key => {
+      this.connections[key] = new WebSocket(WS_CONFIG[key]);
+      this.setupHandlers(key);
+    });
+  }
+  
+  setupHandlers(channel) {
+    const ws = this.connections[channel];
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      this.handleMessage(channel, data);
+    };
+    
+    ws.onopen = () => {
+      console.log(`${channel} connected`);
+    };
+  }
+}
