@@ -1,72 +1,17 @@
-/* 游戏统一容器规格 */
-.game-window {
-    position: fixed;
-    right: 32px; /* 锁定在右侧功能区 */
-    top: 144px;  /* 避开 Header */
-    width: 360px;
-    height: 520px;
-    background: #D84315; /* 亮新年色 - 柿子红 */
-    border: 4px solid #FFD700;
-    border-radius: 16px;
-    z-index: 20; /* Layer 2: 低于名字烟花 */
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-}
-
-.game-header {
-    height: 50px;
-    background: #BF360C;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-    font-weight: bold;
-    border-bottom: 2px solid #FFD700;
-}
-
-.game-body {
-    flex: 1;
-    padding: 24px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
-
-.close-game {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-/* 游戏内 UI 元素 */
-.game-canvas {
-    background: #000;
-    border: 2px solid #FFD700;
-    width: 240px;
-    height: 400px;
-}
-
-.score-board {
-    font-size: 20px;
-    color: #FFD700;
-    font-weight: bold;
-}
-
-/* 按钮统一规则 */
-.btn-game {
-    width: 180px;
-    height: 48px;
-    border-radius: 12px;
-    background: #FFD700; /* 亮色系 */
-    color: #D84315;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 24px;
+:root {
+  /* 主色调 */
+  --primary: #FF6600;      /* 按钮主色 */
+  --accent: #FFD966;       /* 强调色 */
+  --bg-night: #0B0B3B;     /* 夜晚背景 */
+  --bg-day: #87CEFA;       /* 白天背景 */
+  --bg-dusk: #FFA500;      /* 傍晚背景 */
+  
+  /* 文字色 */
+  --text-primary: #FFFFFF;
+  --text-secondary: #FFFFCC;
+  --text-accent: #FFDD00;
+  
+  /* 透明层 */
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --overlay-light: rgba(255, 255, 255, 0.1);
 }
