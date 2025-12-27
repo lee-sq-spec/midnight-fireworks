@@ -1,0 +1,29 @@
+class AdminSystem {
+  constructor() {
+    this.password = 'NY2025@ADMIN'; // 实际项目中应从服务器获取
+    this.isAuthenticated = false;
+  }
+  
+  validate(password) {
+    const hashedInput = this.hashPassword(password);
+    const isValid = hashedInput === this.storedHash;
+    
+    if (isValid) {
+      this.isAuthenticated = true;
+      this.enableAdminFeatures();
+      return true;
+    }
+    return false;
+  }
+  
+  enableAdminFeatures() {
+    // 显示调试仓
+    document.getElementById('debug-panel').style.display = 'block';
+    
+    // 启用名字烟花按钮
+    document.getElementById('name-fireworks-btn').disabled = false;
+    
+    // 显示在线用户列表
+    this.showOnlineUsers();
+  }
+}
