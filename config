@@ -1,0 +1,42 @@
+const CONFIG = {
+  // 时间相关
+  NEW_YEAR: '2025-01-01T00:00:00',
+  ENTRY_OPEN_BEFORE_HOURS: 1,
+  
+  // 烟花配置
+  FIREWORKS: {
+    AUTO_DURATION: 30, // 秒
+    NAME_DISPLAY_TIME: 8, // 秒
+    MAX_CONCURRENT: 5
+  },
+  
+  // 游戏配置
+  GAMES: {
+    POPUP_WIDTH: 400,
+    POPUP_HEIGHT: 600,
+    MAX_OPEN_GAMES: 1
+  },
+  
+  // 祝福墙配置
+  BLESSING_WALL: {
+    MAX_MESSAGES: 50,
+    SCROLL_SPEED: 0.5,
+    FADE_DURATION: 5000
+  },
+  
+  // 管理员名单
+  ADMIN_NAMES: [
+    'AQEEL HARIS TAM',
+    'BRYAN LIM',
+    'CHRONUS SIM',
+    'DECLAN YOONG',
+    'DERRICK HOE',
+    'LIM YU HONG',
+    'LIM WEI FENG',
+    'LYE JUN FENG',
+    'TEO JUAN KIT',
+    'YONG KAI MING',
+    '管理员自己',
+    '跨年快乐/新年快乐'
+  ]
+};
