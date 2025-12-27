@@ -1,0 +1,21 @@
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-areas:
+      "header"
+      "left"
+      "right"
+      "footer";
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+  }
+  
+  .countdown {
+    font-size: 32px;
+  }
+  
+  .game-popup {
+    width: 90vw !important;
+    height: 70vh !important;
+  }
+}
