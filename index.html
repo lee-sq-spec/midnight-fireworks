@@ -1,60 +1,72 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>跨年互动网页</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 New Year Hub - Malacca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Layer 0: 背景动画容器 -->
-  <canvas id="bgCanvas"></canvas>
+    <canvas id="bgCanvas"></canvas>
 
-  <!-- Layer 1: 页面容器 -->
-  <div id="appContainer">
-    <!-- Header Zone -->
-    <header id="headerZone">
-      <div id="countdown" class="countdown">00:00:00</div>
-    </header>
+    <div class="app-grid">
+        <header class="header-zone">
+            <div id="countdown" class="countdown-display">Loading Time...</div>
+        </header>
 
-    <!-- Main Content Zone -->
-    <main id="mainZone">
-      <!-- 左功能区：祝福墙 -->
-      <section id="blessWall">
-        <h2>祝福墙</h2>
-        <ul id="blessList"></ul>
-      </section>
+        <main class="content-zone">
+            <div id="leftZone" class="bless-wall hidden">
+                <h2>Blessing Wall</h2>
+                <div class="wall-scroll" id="wallContent"></div>
+            </div>
 
-      <!-- 右功能区：在线人数 & 俄罗斯方块按钮 -->
-      <section id="statusZone">
-        <div id="onlineStatus">当前在线人数：0</div>
-        <button id="tetrisBtn">俄罗斯方块</button>
-      </section>
-    </main>
+            <div id="centerZone" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <h1 style="font-size: 32px; line-height: 1.6;">A New Chapter Awaits</h1>
+                <p style="font-size: 22px; margin: 20px 0;">Share your gratitude before entering</p>
+                <button id="openBlessBtn" class="btn-game" style="width: 220px; height: 56px;">Write Blessing</button>
+            </div>
 
-    <!-- Footer Zone -->
-    <footer id="footerZone">
-      <button id="adminBtn" title="管理员入口"></button>
-    </footer>
-  </div>
+            <div id="rightZone" class="status-zone hidden">
+                <div class="notice-bar" id="statusMsg">Online: 1</div>
+                <div class="game-menu">
+                    <button class="btn-game" onclick="openGame('tetris')">🕹️ Tetris</button>
+                    <button class="btn-game" onclick="openGame('puzzle')">🧩 Puzzle</button>
+                    <button class="btn-game" onclick="openGame('riddle')">🏮 Riddles</button>
+                    <button class="btn-game" onclick="openGame('connect')">🔢 Connect</button>
+                </div>
+            </div>
+        </main>
 
-  <!-- Layer 3: 弹窗 -->
-  <div id="blessForm" class="popup hidden">
-    <h3>填写你的祝福</h3>
-    <input type="text" id="nickname" placeholder="昵称 / 匿名">
-    <textarea id="thankContent" placeholder="年度感谢 / 帮助事项"></textarea>
-    <textarea id="newYearWish" placeholder="新年祝福"></textarea>
-    <button id="submitBless">提交祝福</button>
-  </div>
+        <footer class="footer-zone">
+            <button id="adminBtn" class="admin-trigger">🔑</button>
+        </footer>
+    </div>
 
-  <div id="adminPopup" class="popup hidden">
-    <h3>管理员验证</h3>
-    <input type="text" id="adminKeyword" placeholder="由站点所有者私下配置">
-    <input type="text" id="adminSecret" placeholder="由站点所有者私下配置">
-    <input type="password" id="adminPassword" placeholder="由站点所有者私下配置">
-    <button id="adminSubmit">提交</button>
-  </div>
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div id="blessForm" class="modal-content hidden">
+            <h2>New Year Blessing</h2>
+            <input type="text" id="nickInput" class="input-field" placeholder="Nickname">
+            <textarea id="thanksInput" class="textarea-field" placeholder="Annual Gratitude"></textarea>
+            <textarea id="wishInput" class="textarea-field" placeholder="New Year Wish"></textarea>
+            <button id="submitBlessBtn" class="btn-game">Submit & Enter</button>
+        </div>
 
-  <script type="module" src="main.js"></script>
+        <div id="adminForm" class="modal-content hidden">
+            <h2>Admin Login</h2>
+            <p style="font-size: 12px; color: #888;">Verification required (private config)</p>
+            <input type="text" id="adm1" class="input-field" placeholder="Keyword">
+            <input type="text" id="adm2" class="input-field" placeholder="Code">
+            <input type="password" id="adm3" class="input-field" placeholder="Password">
+            <button id="loginBtn" class="btn-game">Verify Access</button>
+        </div>
+
+        <div id="gameContainer" class="modal-content hidden" style="width: 600px; height: 700px;">
+            <div id="gameViewport" style="flex:1; background: #000; position: relative;"></div>
+            <button onclick="closeModal()" class="btn-game">Close Game</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
 </body>
 </html>
