@@ -1,0 +1,33 @@
+class BlessingWall {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    this.blessings = [];
+    this.ws = new WebSocket('wss://your-server/blessings');
+    this.initWebSocket();
+  }
+  
+  initWebSocket() {
+    this.ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      this.addBlessing(data);
+    };
+  }
+  
+  addBlessing(blessing) {
+    this.blessings.unshift(blessing);
+    if (this.blessings.length > 50) {
+      this.blessings.pop();
+    }
+    this.render();
+  }
+  
+  render() {
+    this.container.innerHTML = this.blessings
+      .map(b => `
+        <div class="blessing-item">
+          <span class="blessing-time">${b.time}</span>
+          <p class="blessing-text">${b.text}</p>
+        </div>
+      `).join('');
+  }
+}
