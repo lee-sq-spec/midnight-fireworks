@@ -1,0 +1,42 @@
+class TetrisGame {
+  constructor() {
+    this.container = this.createContainer();
+    this.canvas = this.createCanvas();
+    this.score = 0;
+    this.init();
+  }
+  
+  createContainer() {
+    const container = document.createElement('div');
+    container.className = 'game-popup tetris-popup';
+    container.style.width = '400px';
+    container.style.height = '600px';
+    document.body.appendChild(container);
+    return container;
+  }
+  
+  createCanvas() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 500;
+    this.container.appendChild(canvas);
+    return canvas;
+  }
+  
+  init() {
+    // 初始化游戏逻辑
+    this.drawGrid();
+    this.spawnPiece();
+    this.startGameLoop();
+  }
+  
+  drawGrid() {
+    const ctx = this.canvas.getContext('2d');
+    // 绘制游戏网格
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 20; y++) {
+        ctx.strokeRect(x * 30, y * 25, 30, 25);
+      }
+    }
+  }
+}
