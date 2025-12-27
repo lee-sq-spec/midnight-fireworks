@@ -1,0 +1,12 @@
+// 开发环境调试面板
+if (process.env.NODE_ENV === 'development') {
+  const debugPanel = document.createElement('div');
+  debugPanel.id = 'debug-panel';
+  debugPanel.innerHTML = `
+    <h4>调试面板</h4>
+    <button onclick="toggleBackground()">切换背景</button>
+    <button onclick="simulateFireworks()">测试烟花</button>
+    <button onclick="forceNewYear()">模拟跨年</button>
+  `;
+  document.body.appendChild(debugPanel);
+}
