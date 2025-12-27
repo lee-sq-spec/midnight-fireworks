@@ -1,0 +1,39 @@
+class GameManager {
+  constructor() {
+    this.currentGame = null;
+    this.games = {
+      'tetris': TetrisGame,
+      'redpacket': RedPacketGame,
+      'matching': MatchingGame,
+      'puzzle': PuzzleGame,
+      'number-connect': NumberConnectGame,
+      'lantern-riddle': LanternRiddleGame
+    };
+  }
+  
+  openGame(gameType) {
+    // 关闭当前游戏
+    if (this.currentGame) {
+      this.currentGame.close();
+    }
+    
+    // 创建新游戏弹窗
+    const GameClass = this.games[gameType];
+    this.currentGame = new GameClass();
+    
+    // 定位弹窗，确保不遮挡重要UI
+    this.positionPopup(this.currentGame.container);
+  }
+  
+  positionPopup(container) {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // 计算安全位置（避开倒计时和祝福墙）
+    const left = Math.max(100, (viewportWidth - 400) / 2);
+    const top = Math.max(150, (viewportHeight - 600) / 2);
+    
+    container.style.left = `${left}px`;
+    container.style.top = `${top}px`;
+  }
+}
