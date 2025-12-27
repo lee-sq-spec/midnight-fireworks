@@ -1,0 +1,69 @@
+class FireworksSystem {
+  constructor() {
+    this.canvas = document.createElement('canvas');
+    this.canvas.className = 'fireworks-layer';
+    this.ctx = this.canvas.getContext('2d');
+    this.fireworks = [];
+    this.particles = [];
+    this.init();
+  }
+  
+  triggerNewYearFireworks() {
+    // 检测是否为1月1日00:00
+    const now = new Date();
+    if (now.getMonth() === 0 && now.getDate() === 1 && 
+        now.getHours() === 0 && now.getMinutes() === 0) {
+      this.startAutomaticShow();
+    }
+  }
+  
+  startAutomaticShow() {
+    const messages = ['跨年快乐', '新年快乐', 'Happy New Year'];
+    
+    for (let i = 0; i < 30; i++) {
+      setTimeout(() => {
+        this.createTextFirework(messages[i % messages.length]);
+      }, i * 1000);
+    }
+  }
+  
+  createTextFirework(text) {
+    // 创建文字粒子效果
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 3;
+    
+    for (let i = 0; i < text.length; i++) {
+      this.createParticle({
+        x: centerX,
+        y: centerY,
+        text: text[i],
+        color: this.getRandomColor(),
+        size: 20 + Math.random() * 10
+      });
+    }
+  }
+  
+  triggerNameFireworks(names) {
+    names.forEach((name, index) => {
+      setTimeout(() => {
+        this.displayName(name);
+      }, index * 8000);
+    });
+  }
+  
+  displayName(name) {
+    // 在安全区域显示名字烟花
+    const safeArea = this.calculateSafeArea();
+    this.createNameFirework(name, safeArea);
+  }
+  
+  calculateSafeArea() {
+    // 计算不覆盖UI的安全区域
+    return {
+      x: window.innerWidth * 0.2,
+      y: window.innerHeight * 0.2,
+      width: window.innerWidth * 0.6,
+      height: window.innerHeight * 0.6
+    };
+  }
+}
