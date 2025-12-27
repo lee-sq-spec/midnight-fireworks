@@ -1,0 +1,37 @@
+<div id="welcome-page">
+  <!-- Layer 0: 动态背景Canvas -->
+  <canvas id="background-canvas"></canvas>
+  
+  <!-- Layer 1: 内容层 -->
+  <header class="header-zone">
+    <div class="countdown" id="global-countdown"></div>
+  </header>
+  
+  <main class="central-zone">
+    <h1 class="main-title">欢迎来到跨年庆典</h1>
+    <p class="subtitle">写下你的祝福，共同迎接新年</p>
+    
+    <div class="blessing-form">
+      <textarea id="blessing-text" placeholder="写下你的新年祝福..."></textarea>
+      <button id="enter-main-btn" class="primary-btn" disabled>
+        填写祝福才能进入
+      </button>
+    </div>
+  </main>
+  
+  <footer class="footer-zone">
+    <button id="admin-btn" class="admin-btn">
+      <i class="icon-key"></i>
+    </button>
+  </footer>
+  
+  <!-- 管理员验证弹窗 -->
+  <div id="admin-modal" class="modal">
+    <div class="modal-content">
+      <h3>管理员验证</h3>
+      <input type="password" id="admin-password" placeholder="输入管理员密码">
+      <button id="admin-submit">验证</button>
+      <div id="admin-message"></div>
+    </div>
+  </div>
+</div>
