@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 New Year Hub - Malacca</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>2025 马六甲跨年空间</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,58 +12,63 @@
 
     <div class="app-grid">
         <header class="header-zone">
-            <div id="countdown" class="countdown-display">Loading Time...</div>
+            <div id="countdown" class="countdown-display">同步中...</div>
         </header>
 
         <main class="content-zone">
             <div id="leftZone" class="bless-wall hidden">
-                <h2>Blessing Wall</h2>
+                <h2>✨ 祝福墙</h2>
                 <div class="wall-scroll" id="wallContent"></div>
             </div>
 
-            <div id="centerZone" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                <h1 style="font-size: 32px; line-height: 1.6;">A New Chapter Awaits</h1>
-                <p style="font-size: 22px; margin: 20px 0;">Share your gratitude before entering</p>
-                <button id="openBlessBtn" class="btn-game" style="width: 220px; height: 56px;">Write Blessing</button>
+            <div id="centerZone" class="center-content">
+                <div id="fireworkSafeZone"></div>
+                <div id="welcomeInfo">
+                    <h1 class="main-title">跨越 2024 · 迎接 2025</h1>
+                    <button id="openBlessBtn" class="btn-main">开始写祝福</button>
+                </div>
             </div>
 
             <div id="rightZone" class="status-zone hidden">
-                <div class="notice-bar" id="statusMsg">Online: 1</div>
+                <div class="notice-bar" id="statusMsg">在线人数: 1</div>
                 <div class="game-menu">
-                    <button class="btn-game" onclick="openGame('tetris')">🕹️ Tetris</button>
-                    <button class="btn-game" onclick="openGame('puzzle')">🧩 Puzzle</button>
-                    <button class="btn-game" onclick="openGame('riddle')">🏮 Riddles</button>
-                    <button class="btn-game" onclick="openGame('connect')">🔢 Connect</button>
+                    <button class="btn-game" onclick="GameSystem.open('tetris')">🕹️ 俄罗斯方块</button>
+                    <button class="btn-game" onclick="GameSystem.open('puzzle')">🧩 新年拼图</button>
+                    <button class="btn-game" onclick="GameSystem.open('riddle')">🏮 猜灯谜</button>
+                    <button class="btn-game" onclick="GameSystem.open('connect')">🔢 数字连线</button>
+                    <button class="btn-game" onclick="GameSystem.open('hongbao')">🧧 红包接接乐</button>
                 </div>
             </div>
         </main>
 
         <footer class="footer-zone">
-            <button id="adminBtn" class="admin-trigger">🔑</button>
+            <button id="adminBtn" class="admin-btn">🔑</button>
         </footer>
     </div>
 
+    <div id="gameWindow" class="game-window hidden">
+        <div class="game-header">
+            <span id="gameTitle">游戏名称</span>
+            <button onclick="GameSystem.close()" class="close-game">×</button>
+        </div>
+        <div id="gameBody" class="game-body">
+            </div>
+    </div>
+
     <div id="modalOverlay" class="modal-overlay hidden">
-        <div id="blessForm" class="modal-content hidden">
-            <h2>New Year Blessing</h2>
-            <input type="text" id="nickInput" class="input-field" placeholder="Nickname">
-            <textarea id="thanksInput" class="textarea-field" placeholder="Annual Gratitude"></textarea>
-            <textarea id="wishInput" class="textarea-field" placeholder="New Year Wish"></textarea>
-            <button id="submitBlessBtn" class="btn-game">Submit & Enter</button>
+        <div id="blessForm" class="modal-card hidden">
+            <h2>填写新年祝福</h2>
+            <input type="text" id="nickInput" class="input-item" placeholder="你的昵称">
+            <textarea id="thanksInput" class="area-item" placeholder="年度感谢"></textarea>
+            <textarea id="wishInput" class="area-item" placeholder="新年愿望"></textarea>
+            <button id="submitBlessBtn" class="btn-submit">提交并进入内页</button>
         </div>
-
-        <div id="adminForm" class="modal-content hidden">
-            <h2>Admin Login</h2>
-            <p style="font-size: 12px; color: #888;">Verification required (private config)</p>
-            <input type="text" id="adm1" class="input-field" placeholder="Keyword">
-            <input type="text" id="adm2" class="input-field" placeholder="Code">
-            <input type="password" id="adm3" class="input-field" placeholder="Password">
-            <button id="loginBtn" class="btn-game">Verify Access</button>
-        </div>
-
-        <div id="gameContainer" class="modal-content hidden" style="width: 600px; height: 700px;">
-            <div id="gameViewport" style="flex:1; background: #000; position: relative;"></div>
-            <button onclick="closeModal()" class="btn-game">Close Game</button>
+        <div id="adminForm" class="modal-card hidden">
+            <h2>管理员验证</h2>
+            <input type="text" id="adm1" class="input-item" placeholder="暗语">
+            <input type="text" id="adm2" class="input-item" placeholder="暗号">
+            <input type="password" id="adm3" class="input-item" placeholder="密码">
+            <button id="loginBtn" class="btn-submit">验证身份</button>
         </div>
     </div>
 
